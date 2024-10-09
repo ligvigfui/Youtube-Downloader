@@ -1,4 +1,4 @@
-﻿namespace YoutubeDownloader;
+﻿namespace YoutubeDownloader.Extensions;
 
 public static class VideoExtensions
 {

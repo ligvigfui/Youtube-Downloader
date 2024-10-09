@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="YoutubeDownloader.Pages.PlaylistPage"
+    xmlns:vm="clr-namespace:YoutubeDownloader.ViewModels"
+    x:DataType="vm:PlaylistViewModel"
+    xmlns:v="clr-namespace:YoutubeDownloader.Views"
+    Title="Playlist Page">
+    <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout
+                Padding="30,0"
+                Spacing="25">
+                <Entry
+                    x:Name="PlaylistUrlEntry"
+                    Text="{Binding PlaylistUrl}"
+                    Placeholder="Enter Playlist URL"
+                    HorizontalOptions="FillAndExpand" />
+                <Button
+                    x:Name="PasteLastCopiedButton"
+                    Text="Paste"
+                    Command="{Binding PasteCommand}"
+                    HorizontalOptions="End" />
+            </HorizontalStackLayout>
+            <CollectionView
+                x:Name="PlaylistCollectionView"
+                ItemsSource="{Binding Videos}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="v:VideoView">
+                        <HorizontalStackLayout
+                            Padding="30,0"
+                            Spacing="25">
+                            <Image
+                                    Source="{Binding ThumbnailUrl}"
+                                    HorizontalOptions="Start" />
+                            <Label
+                                Text="{Binding Title}"
+                                HorizontalOptions="FillAndExpand" />
+                            <Button
+                                Text="Download"
+                                Command="{Binding BindingContext.DownloadCommand, Source={x:Reference PlaylistCollectionView}}"
+                                CommandParameter="{Binding Video}"
+                                HorizontalOptions="End" />
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

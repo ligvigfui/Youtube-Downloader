@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YoutubeDownloader.Pages.SettingsPage"
+             xmlns:vm="clr-namespace:YoutubeDownloader.ViewModels"
+             x:DataType="vm:SettingsViewModel"
+             Title="SettingsPage">
+    <VerticalStackLayout>
+        <Label
+            Text="{Binding DownloadPath}"
+            FontSize="Large"
+            HorizontalOptions="Center" />
+
+        <Button Text="Change Path"
+                Command="{Binding SelectFolderCommand}"
+                HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>

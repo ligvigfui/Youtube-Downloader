@@ -1,0 +1,13 @@
+﻿global using CommunityToolkit.Maui;
+global using CommunityToolkit.Maui.Storage;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microsoft.Extensions.Logging;
+global using System.Collections.ObjectModel;
+global using System.Text;
+global using YoutubeDownloader.ViewModels;
+global using YoutubeDownloader.Views;
+global using YoutubeExplode;
+global using YoutubeExplode.Common;
+global using YoutubeExplode.Playlists;
+global using YoutubeExplode.Videos;

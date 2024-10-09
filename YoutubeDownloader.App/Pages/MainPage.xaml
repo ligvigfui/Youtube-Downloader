@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YoutubeDownloader.Pages.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Button
+                x:Name="DownloadVideo"
+                Text="Download mp3 from Video"
+                Clicked="OnDownloadVideoClicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="DownloadPlaylist"
+                Text="Download mp3 from Playlist"
+                Clicked="OnDownloadPlaylistClicked"
+                HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
