@@ -39,7 +39,7 @@ public partial class PlaylistViewModel : ObservableObject
     {
         try
         {
-            LoadPlaylist().Wait();
+            _ = LoadPlaylist();
         }
         catch {}
     }
@@ -47,13 +47,6 @@ public partial class PlaylistViewModel : ObservableObject
     async Task LoadPlaylist()
     {
         Videos.Clear();
-        var http = new HttpClient();
-        try
-        {
-            // google 
-            var result = await http.GetAsync("https://www.google.com");
-        }
-        catch { }
         var playlist = await Youtube.Playlists.GetAsync(PlaylistUrl);
         var videos = Youtube.Playlists.GetVideosAsync(playlist.Id);
         await foreach (var video in videos)
@@ -83,13 +76,18 @@ public partial class PlaylistViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task DownloadRange()
+    void DownloadRange()
+    {
+        _ = DownloadRangeInner();
+    }
+
+    async Task DownloadRangeInner()
     {
         if (Range is null)
             return;
         foreach (var video in Videos.ToList()[Range.Value])
         {
-            await video.DownloadCommand.ExecuteAsync(null);
+            await video.DownloadInner();
         }
     }
 }

@@ -23,12 +23,17 @@ public partial class VideoViewModel : ObservableObject
         Youtube = youtube;
         Video = video;
         Title = video?.Title;
-        ThumbnailUrl = video?.Thumbnails.GetWithHighestResolution().Url;
+        ThumbnailUrl = video?.Thumbnails.First(x => x.Resolution.Equals(new Resolution(120, 90))).Url;
         DownloadButtonImage = "download.jpg";
     }
 
     [RelayCommand]
-    async Task Download()
+    void Download()
+    {
+        _ = DownloadInner();
+    }
+
+    public async Task DownloadInner()
     {
         try
         {

@@ -11,8 +11,18 @@ public static class YoutubeExtensions
         var validFileNameTitle = string.Join("_", video.Title.Split(Path.GetInvalidFileNameChars()));
         var fileName = $"{validFileNameTitle}.mp3";
         var stream = await youtube.Videos.Streams.GetAsync(streamInfo);
-        var result = await FileSaver.Default.SaveAsync(SettingsViewModel.GlobalDownloadPath, fileName, stream);
-        result.EnsureSuccess();
+        
+        // Ensure the directory exists
+        Directory.CreateDirectory(SettingsViewModel.GlobalDownloadPath);
+
+        // Combine the directory path and file name
+        var filePath = Path.Combine(SettingsViewModel.GlobalDownloadPath, fileName);
+
+        // Save the file directly to the specified path
+        using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+        
+        await stream.CopyToAsync(fileStream);
+
         return fileName;
     }
 }
