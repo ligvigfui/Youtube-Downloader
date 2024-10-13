@@ -5,11 +5,10 @@ public partial class PlaylistViewModel : ObservableObject
     YoutubeClient Youtube;
 
     [ObservableProperty]
-    // when this property is modified, LoadPlaylist function is called
     string playlistUrl;
 
     [ObservableProperty]
-    ObservableCollection<VideoViewModel> videos;
+    ObservableCollection<VideoViewModel> videos = [];
 
     [ObservableProperty]
     int? start;
@@ -38,12 +37,23 @@ public partial class PlaylistViewModel : ObservableObject
 
     partial void OnPlaylistUrlChanged(string? oldValue, string newValue)
     {
-        LoadPlaylist().Wait();
+        try
+        {
+            LoadPlaylist().Wait();
+        }
+        catch {}
     }
 
     async Task LoadPlaylist()
     {
         Videos.Clear();
+        var http = new HttpClient();
+        try
+        {
+            // google 
+            var result = await http.GetAsync("https://www.google.com");
+        }
+        catch { }
         var playlist = await Youtube.Playlists.GetAsync(PlaylistUrl);
         var videos = Youtube.Playlists.GetVideosAsync(playlist.Id);
         await foreach (var video in videos)

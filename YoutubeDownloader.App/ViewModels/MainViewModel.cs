@@ -3,14 +3,14 @@
 partial class MainViewModel : ObservableObject
 {
     [RelayCommand]
-    void NavigateToPlaylists()
+    async Task NavigateToPlaylists()
     {
-        Shell.Current.GoToAsync(nameof(PlaylistPage));
+        await Shell.Current.GoToAsync(nameof(PlaylistPage));
     }
 
     [RelayCommand]
-    void NavigateToSettings()
+    async Task NavigateToSettings()
     {
-        Shell.Current.GoToAsync(nameof(SettingsPage));
+        await Shell.Current.GoToAsync(nameof(SettingsPage));
     }
 }

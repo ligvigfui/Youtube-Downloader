@@ -8,6 +8,7 @@ global using System.Text;
 global using YoutubeDownloader.Extensions;
 global using YoutubeDownloader.Pages;
 global using YoutubeDownloader.ViewModels;
+global using YoutubeDownloader.Views;
 global using YoutubeExplode;
 global using YoutubeExplode.Common;
 global using YoutubeExplode.Playlists;

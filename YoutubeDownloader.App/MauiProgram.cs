@@ -15,7 +15,16 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<YoutubeClient>();
+
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<MainViewModel>();
+
+        builder.Services.AddSingleton<PlaylistPage>();
         builder.Services.AddSingleton<PlaylistViewModel>();
+
+        builder.Services.AddTransient<VideoView>();
+
+        builder.Services.AddSingleton<SettingsPage>();
         builder.Services.AddSingleton<SettingsViewModel>();
         builder.Services.AddSingleton(FileSaver.Default);
 #if DEBUG
