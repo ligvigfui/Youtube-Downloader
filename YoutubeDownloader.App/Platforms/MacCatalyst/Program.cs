@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace YoutubeDownloader.App;
+namespace YoutubeDownloader;
 
 public class Program
 {

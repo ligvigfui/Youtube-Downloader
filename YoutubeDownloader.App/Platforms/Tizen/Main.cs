@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace YoutubeDownloader.App;
+namespace YoutubeDownloader;
 
 internal class Program : MauiApplication
 {
