@@ -35,11 +35,11 @@
                             <v:VideoView />
                             <VerticalStackLayout>
                                 <Button
-                                    ImageSource="range_start.png"
+                                    ImageSource="from.png"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaylistViewModel}}, Path=RangeStartCommand}"
                                     CommandParameter="{Binding Title}" />
                                 <Button
-                                    ImageSource="range_end.png"
+                                    ImageSource="to.png"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaylistViewModel}}, Path=RangeEndCommand}"
                                     CommandParameter="{Binding Title}" />
                             </VerticalStackLayout>

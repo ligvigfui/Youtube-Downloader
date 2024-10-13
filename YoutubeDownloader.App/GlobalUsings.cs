@@ -6,6 +6,7 @@ global using Microsoft.Extensions.Logging;
 global using System.Collections.ObjectModel;
 global using System.Text;
 global using YoutubeDownloader.Extensions;
+global using YoutubeDownloader.Pages;
 global using YoutubeDownloader.ViewModels;
 global using YoutubeExplode;
 global using YoutubeExplode.Common;
