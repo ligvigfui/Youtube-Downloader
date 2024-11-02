@@ -27,13 +27,10 @@ public partial class VideoViewModel : ObservableObject
         DownloadButtonImage = "download.jpg";
     }
 
-    [RelayCommand]
-    void Download()
-    {
-        _ = DownloadInner();
-    }
+    public IAsyncRelayCommand DownloadCommand =>
+        new AsyncRelayCommand(Download);
 
-    public async Task DownloadInner()
+    public async Task Download()
     {
         try
         {

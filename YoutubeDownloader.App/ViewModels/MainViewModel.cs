@@ -2,7 +2,9 @@
 
 partial class MainViewModel : ObservableObject
 {
-    [RelayCommand]
+    public IAsyncRelayCommand NavigateToPlaylistsCommand =>
+        new AsyncRelayCommand(NavigateToPlaylists);
+    
     async Task NavigateToPlaylists()
     {
         await Shell.Current.GoToAsync(nameof(PlaylistPage));

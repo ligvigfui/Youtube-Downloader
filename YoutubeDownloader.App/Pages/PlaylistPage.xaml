@@ -34,12 +34,14 @@
                         <HorizontalStackLayout>
                             <v:VideoView />
                             <VerticalStackLayout>
-                                <Button
-                                    ImageSource="from.png"
+                                <ImageButton
+                                    Source="from.png"
+                                    HeightRequest="100"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaylistViewModel}}, Path=RangeStartCommand}"
                                     CommandParameter="{Binding Title}" />
-                                <Button
-                                    ImageSource="to.png"
+                                <ImageButton
+                                    Source="to.png"
+                                    HeightRequest="100"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PlaylistViewModel}}, Path=RangeEndCommand}"
                                     CommandParameter="{Binding Title}" />
                             </VerticalStackLayout>

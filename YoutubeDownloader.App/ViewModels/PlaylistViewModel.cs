@@ -1,11 +1,9 @@
 ﻿namespace YoutubeDownloader.ViewModels;
 
-public partial class PlaylistViewModel : ObservableObject
+public partial class PlaylistViewModel(YoutubeClient youtube) : ObservableObject
 {
-    YoutubeClient Youtube;
-
     [ObservableProperty]
-    string playlistUrl;
+    string playlistUrl = "";
 
     [ObservableProperty]
     ObservableCollection<VideoViewModel> videos = [];
@@ -19,13 +17,6 @@ public partial class PlaylistViewModel : ObservableObject
     Range? Range => Start is null || End is null ? null : Start..End;
 
     public string DownloadRangeText => Range is null ? "" : "Download Selected";
-
-    public PlaylistViewModel(YoutubeClient youtube)
-    {
-        Youtube = youtube;
-        PlaylistUrl = string.Empty;
-        Videos = [];
-    }
 
     [RelayCommand]
     public async Task Paste()
@@ -47,11 +38,11 @@ public partial class PlaylistViewModel : ObservableObject
     async Task LoadPlaylist()
     {
         Videos.Clear();
-        var playlist = await Youtube.Playlists.GetAsync(PlaylistUrl);
-        var videos = Youtube.Playlists.GetVideosAsync(playlist.Id);
+        var playlist = await youtube.Playlists.GetAsync(PlaylistUrl);
+        var videos = youtube.Playlists.GetVideosAsync(playlist.Id);
         await foreach (var video in videos)
         {
-            Videos.Add(new VideoViewModel(Youtube, video));
+            Videos.Add(new VideoViewModel(youtube, video));
         }
     }
 
@@ -75,19 +66,16 @@ public partial class PlaylistViewModel : ObservableObject
             Start = null;
     }
 
-    [RelayCommand]
-    void DownloadRange()
-    {
-        _ = DownloadRangeInner();
-    }
+    public IAsyncRelayCommand DownloadRangeCommand =>
+        new AsyncRelayCommand(DownloadRange);
 
-    async Task DownloadRangeInner()
+    async Task DownloadRange()
     {
         if (Range is null)
             return;
         foreach (var video in Videos.ToList()[Range.Value])
         {
-            await video.DownloadInner();
+            await video.Download();
         }
     }
 }

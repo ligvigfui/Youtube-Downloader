@@ -4,26 +4,34 @@
              x:Class="YoutubeDownloader.Views.VideoView"
              xmlns:vm="clr-namespace:YoutubeDownloader.ViewModels"
              x:DataType="vm:VideoViewModel">
-    <HorizontalStackLayout
-        Padding="30,0"
-        Spacing="25">
-        <Image
-            Source="{Binding ThumbnailUrl}"
-            HorizontalOptions="Start" />
-        <VerticalStackLayout
-            Spacing="5">
-            <Label
-                Text="{Binding Title}"
-                HorizontalOptions="FillAndExpand" />
-            <Label
-                Text="{Binding Error}"
-                TextColor="Red"
-                HorizontalOptions="FillAndExpand" />
-        </VerticalStackLayout>
-        <Button
-            x:Name="DownloadButton"
-            ImageSource="{Binding DownloadButtonImage}"
-            Command="{Binding DownloadCommand}"
-            HorizontalOptions="End" />
-    </HorizontalStackLayout>
+    <Frame
+        Padding="10"
+        CornerRadius="10"
+        HasShadow="True"
+        BorderColor="Gray">
+        <HorizontalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="{Binding ThumbnailUrl}"
+                HeightRequest="100"
+                HorizontalOptions="Start" />
+            <VerticalStackLayout
+                Spacing="5">
+                <Label
+                    Text="{Binding Title}"
+                    HorizontalOptions="FillAndExpand" />
+                <Label
+                    Text="{Binding Error}"
+                    TextColor="Red"
+                    HorizontalOptions="FillAndExpand" />
+            </VerticalStackLayout>
+            <ImageButton
+                x:Name="DownloadButton"
+                Source="{Binding DownloadButtonImage}"
+                HeightRequest="100"
+                Command="{Binding DownloadCommand}"
+                HorizontalOptions="End" />
+        </HorizontalStackLayout>
+    </Frame>
 </ContentView>
