@@ -17,7 +17,7 @@ List<string> playlistDownloadOptions =
 Console.WriteLine("Enter the download folder:");
 var downloadFolder = Console.ReadLine();
 if (string.IsNullOrWhiteSpace(downloadFolder))
-    downloadFolder = @"C:\Users\BoldizsárNémeth\Downloads";
+    downloadFolder = @"C:\Users\ligvi";
 
 while (true)
 {
