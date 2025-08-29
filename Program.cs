@@ -12,12 +12,14 @@ List<string> playlistDownloadOptions =
 [
     "Download all videos",
     "Download after specific video",
+    "Download specified range"
 ];
 
 Console.WriteLine("Enter the download folder:");
 var downloadFolder = Console.ReadLine();
 if (string.IsNullOrWhiteSpace(downloadFolder))
-    downloadFolder = @"C:\Users\ligvi";
+    // get the default windows download folder
+    downloadFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
 
 while (true)
 {
@@ -80,6 +82,9 @@ async Task DownloadFromPlaylist()
                 0..videos.Count,
             ConsoleKey.D1 or
             ConsoleKey.NumPad1 =>
+                AfterVideoToEnd(videos.Count),
+            ConsoleKey.D2 or
+            ConsoleKey.NumPad2 =>
                 GetRange(videos.Count),
             _ => throw new NotImplementedException()
         };
@@ -95,11 +100,22 @@ async Task DownloadFromPlaylist()
     }
 }
 
-Range GetRange(int count)
+Range AfterVideoToEnd(int count)
 {
     Console.WriteLine("Enter the start index:");
     var start = int.Parse(Console.ReadLine() ?? "0");
     return start..count;
+}
+
+Range GetRange(int count)
+{
+    Console.WriteLine("Enter the range:");
+    Console.WriteLine("Format: start?..end?");
+    var rangeInput = Console.ReadLine();
+    var parts = rangeInput?.Split("..") ?? [];
+    var start = string.IsNullOrWhiteSpace(parts.ElementAtOrDefault(0)) ? 0 : int.Parse(parts[0]);
+    var end = string.IsNullOrWhiteSpace(parts.ElementAtOrDefault(1)) ? count : int.Parse(parts[1]);
+    return start..end;
 }
 
 async Task DownloadVideo()
